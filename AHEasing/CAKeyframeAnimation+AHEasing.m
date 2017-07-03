@@ -10,6 +10,8 @@
 //  http://sam.zoy.org/wtfpl/COPYING for more details.
 //
 
+#import <UIKit/UIKit.h>
+
 #import "CAKeyframeAnimation+AHEasing.h"
 
 #if !defined(AHEasingDefaultKeyframeCount)
@@ -24,7 +26,7 @@
 + (id)animationWithKeyPath:(NSString *)path function:(AHEasingFunction)function fromValue:(CGFloat)fromValue toValue:(CGFloat)toValue keyframeCount:(size_t)keyframeCount
 {
 	NSMutableArray *values = [NSMutableArray arrayWithCapacity:keyframeCount];
-	
+
 	CGFloat t = 0.0;
 	CGFloat dt = 1.0 / (keyframeCount - 1);
 	for(size_t frame = 0; frame < keyframeCount; ++frame, t += dt)
@@ -32,7 +34,7 @@
 		CGFloat value = fromValue + function(t) * (toValue - fromValue);
 		[values addObject:[NSNumber numberWithFloat:(float)value]];
 	}
-	
+
 	CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:path];
 	[animation setValues:values];
 	return animation;
@@ -46,7 +48,7 @@
 + (id)animationWithKeyPath:(NSString *)path function:(AHEasingFunction)function fromPoint:(CGPoint)fromPoint toPoint:(CGPoint)toPoint keyframeCount:(size_t)keyframeCount
 {
 	NSMutableArray *values = [NSMutableArray arrayWithCapacity:keyframeCount];
-	
+
 	CGFloat t = 0.0;
 	CGFloat dt = 1.0 / (keyframeCount - 1);
 	for(size_t frame = 0; frame < keyframeCount; ++frame, t += dt)
@@ -59,7 +61,7 @@
 		[values addObject:[NSValue valueWithPoint:NSMakePoint(x, y)]];
 #endif
 	}
-	
+
 	CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:path];
 	[animation setValues:values];
 	return animation;
@@ -73,7 +75,7 @@
 + (id)animationWithKeyPath:(NSString *)path function:(AHEasingFunction)function fromSize:(CGSize)fromSize toSize:(CGSize)toSize keyframeCount:(size_t)keyframeCount
 {
 	NSMutableArray *values = [NSMutableArray arrayWithCapacity:keyframeCount];
-	
+
 	CGFloat t = 0.0;
 	CGFloat dt = 1.0 / (keyframeCount - 1);
 	for(size_t frame = 0; frame < keyframeCount; ++frame, t += dt)
@@ -86,7 +88,7 @@
 		[values addObject:[NSValue valueWithSize:NSMakeSize(w, h)]];
 #endif
 	}
-	
+
 	CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:path];
 	[animation setValues:values];
 	return animation;
